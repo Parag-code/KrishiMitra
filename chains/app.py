@@ -5,11 +5,11 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 from flask import Flask, request, jsonify
 import tempfile, os, json, re
 
-from crop_chain import recommend_crop
-from soil_chain import analyze_soil
-from irrigation_chain import analyze_irrigation
-from disease_chain import analyze_leaf
-from qna_chain import krishimitra_answer
+from chains.crop_chain import recommend_crop
+from chains.soil_chain import analyze_soil
+from chains.irrigation_chain import analyze_irrigation
+from chains.disease_chain import analyze_leaf
+from chains.qna_chain import krishimitra_answer
 
 import warnings
 from dotenv import load_dotenv
@@ -88,3 +88,4 @@ def krishimitra_api():
 
 if __name__ == "__main__":
     app.run(debug=False)
+

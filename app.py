@@ -26,12 +26,11 @@ CORS(app)
 
 @app.before_request
 def verify_api_key():
-    if request.path == "/":
+    if request.path in ["/", "/health"]:
         return
     client_key = request.headers.get("x-api-key") or request.args.get("api_key")
     if not client_key or client_key != API_KEY:
         return jsonify({"error": "Unauthorized — invalid or missing API key."}), 401
-
 
 
 @app.route("/health", methods=["GET"])
@@ -96,6 +95,7 @@ def krishimitra_api():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port, debug=False)
+
 
 
 
